@@ -30,7 +30,11 @@ var testFiles = [
     "spec/*.spec.js"
 ];
 
+<<<<<<< HEAD
+gulp.task("test", ["build"], function () {
+=======
 gulp.task("test", ["build"], function() {
+>>>>>>> RyanMaster/master
     gulp.src(testFiles)
         .pipe(karma({
             configFile: __dirname + "/karma.conf.js",

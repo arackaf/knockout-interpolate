@@ -36,62 +36,62 @@ describe("knockout-interpolate", function() {
 
     describe("text interpolation tests", function() {
 
-        it("should respect normal bindings", function () {
+        it("should respect normal bindings", function() {
             var test = insertTestCase("<div data-bind=\"text: first\"></div>");
 
             test.innerHTML.should.eql("<div data-bind=\"text: first\">Bob</div>");
         });
 
-        it("should interpolate a simple value", function () {
+        it("should interpolate a simple value", function() {
             var test = insertTestCase("{{ first }}");
 
             test.innerHTML.should.eql("Bob");
         });
 
-        it("should interpolate and unwrap an observable", function () {
+        it("should interpolate and unwrap an observable", function() {
             var test = insertTestCase("{{ last }}");
 
             test.innerHTML.should.eql("Smith");
         });
 
-        it("should execute expressions", function () {
+        it("should execute expressions", function() {
             var test = insertTestCase("{{ first + ' ' + last() }}");
 
             test.innerHTML.should.eql("Bob Smith");
         });
 
-        it("should interpolate multiple values", function () {
+        it("should interpolate multiple values", function() {
             var test = insertTestCase("{{ first }}{{ last }}");
 
             test.innerHTML.should.eql("BobSmith");
         });
 
-        it("should preserve surrounding characters when interpolating", function () {
+        it("should preserve surrounding characters when interpolating", function() {
             var test = insertTestCase("Hi {{ first }} P {{ last }}!");
 
             test.innerHTML.should.eql("Hi Bob P Smith!");
         });
 
-        it("should ignore mal-formed interpolation", function () {
+        it("should ignore mal-formed interpolation", function() {
             var test = insertTestCase("{{ what");
 
             test.innerHTML.should.eql("{{ what");
         });
 
-        it("should ignore interpolation outside of text nodes", function () {
+        it("should ignore interpolation outside of text nodes", function() {
             var test = insertTestCase("<div data-bind=\"text: '{{ first }}'\"></div>");
 
             test.innerHTML.should.eql("<div data-bind=\"text: '{{ first }}'\">{{ first }}</div>");
         });
 
-        it("should not update text when observables update (just one-time replacement)", function () {
+        it("should not update text when observables update (just one-time replacement)", function() {
             var test = insertTestCase("{{ last }}");
 
             vm.last("Johnson");
 
             test.innerHTML.should.eql("Smith");
         });
-    });
+    } );
 
     describe("attribute tests", function() {
 
@@ -334,7 +334,7 @@ describe("knockout-interpolate", function() {
         describe("css class tests", function() {
 
             it("should set a class", function() {
-                var test = insertTestCase("<a class='anchor-first' data-koset='css: { a: first }'></a>");
+                insertTestCase("<a class='anchor-first' data-koset='css: { a: first }'></a>");
 
                 var hasClass = $(".anchor-first").hasClass("a");
 
@@ -342,7 +342,7 @@ describe("knockout-interpolate", function() {
             });
 
             it("should unwrap observables", function() {
-                var test = insertTestCase("<a id='anchor_css_test2' data-koset='css: { b: last }'></a>");
+                insertTestCase("<a id='anchor_css_test2' data-koset='css: { b: last }'></a>");
 
                 var hasClass = $("#anchor_css_test2").hasClass("b");
 
@@ -350,7 +350,7 @@ describe("knockout-interpolate", function() {
             });
 
             it("should set css class in expression true", function() {
-                var test = insertTestCase("<a class='anchor-first' data-koset='css: { c: first == \"Bob\" }'></a>");
+                insertTestCase("<a class='anchor-first' data-koset='css: { c: first == \"Bob\" }'></a>");
 
                 var hasClass = $(".anchor-first").hasClass("c");
 
@@ -358,7 +358,7 @@ describe("knockout-interpolate", function() {
             });
 
             it("should set css class in expression false", function() {
-                var test = insertTestCase("<a id='anchor_css_test4' class='d' data-koset='css: { d: first == \"BobX\" }'></a>");
+                insertTestCase("<a id='anchor_css_test4' class='d' data-koset='css: { d: first == \"BobX\" }'></a>");
 
                 var hasClass = $("#anchor_css_test4").hasClass("d");
 
